@@ -1,0 +1,36 @@
+#!perl
+
+use strict;
+use warnings;
+use LWP::UserAgent;
+use Getopt::Long qw(GetOptions);
+use Email::Address;
+use List::MoreUtils qw(uniq);
+#PODNAME: github-email
+
+
+my $name;
+
+GetOptions( "name=s" => \$name ) or die("Error");
+
+my $ua = LWP::UserAgent->new;
+$ua->timeout(15);
+my $json_get = $ua->get("https://api.github.com/users/$name/events/public");
+
+if ( $json_get->is_success ) {
+    my $raw_json    = $json_get->decoded_content;
+    my @addresses   = Email::Address->parse($raw_json);
+    my @unique_addr = uniq @addresses;
+
+    for my $address (@unique_addr) {
+        if ( $address ne 'git@github.com' ) {
+            print "\t$address\n";
+        }
+    }
+}
+
+else {
+    die "User is not exist";
+    exit 1;
+}
+
