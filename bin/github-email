@@ -13,6 +13,10 @@ my $name;
 
 GetOptions( "name=s" => \$name ) or die("Error");
 
+if (not defined $name) {
+	die "Error. Username is not defined. Please try again with: 'github-email -n username'.";
+}
+
 my $ua = LWP::UserAgent->new;
 $ua->timeout(15);
 my $json_get = $ua->get("https://api.github.com/users/$name/events/public");
