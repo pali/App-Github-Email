@@ -1,20 +1,51 @@
-use strict;
-use warnings;
 package App::Github::Email;
-#ABSTRACT: Search and print related Github user emails.
-# VERSION
+
+use LWP::UserAgent;
+use Getopt::Long qw(GetOptions);
+use Email::Address;
+use List::MoreUtils qw(uniq);
+#PODNAME: App-Github-Email
+#VERSION
+
+my $name;
+
+GetOptions( "name=s" => \$name ) or die("Error");
+
+if (not defined $name)
+{
+	die "Error. Username is not defined. Please try again with: 'github-email -n username'.\n";
+}
+
+my $ua = LWP::UserAgent->new;
+my $json_get = $ua->get("https://api.github.com/users/$name/events/public");
+
+if ( $json_get->is_success )
+{
+    my $raw_json    = $json_get->decoded_content;
+    my @addresses   = Email::Address->parse($raw_json);
+    my @unique_addr = uniq @addresses;
+
+    for my $address (@unique_addr)
+	{
+        if ( $address ne 'git@github.com')
+		{
+            say $address;
+        }
+    }
+}
+
+else
+{
+    die "User is not exist\n";
+}
 
 __END__
 
-=pod
-
 =head1 SYNOPSIS
 
-	github-email [-n|-name|--name] <USERNAME> # => output related Github user emails (from event)
+	github-email --name <Github username>
 
-=head1 DESCRIPTION
-
-Search and print Github related user emails from public event.
+	github-email --name faraco
+	github-email --n faraco 
 
 =cut
-1;
