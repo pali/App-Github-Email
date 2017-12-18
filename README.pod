@@ -1,0 +1,40 @@
+=pod
+
+=encoding UTF-8
+
+=head1 NAME
+
+App::Github::Email - Search and print particular Github user emails.
+
+=head1 VERSION
+
+version 0.1.0
+
+=head1 SYNOPSIS
+
+	github-email --name <Github username>
+
+	github-email --name faraco
+	github-email --n faraco 
+
+=item get_user($username)
+
+    description: Retrieves Github user email addresses.
+
+    parameter: $username - Github account username.
+
+    returns: A list of email addresses.
+
+=head1 AUTHOR
+
+faraco <skelic3@gmail.com>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is Copyright (c) 2017 by faraco.
+
+This is free software, licensed under:
+
+  The GNU General Public License, Version 3, June 2007
+
+=cut

@@ -1,2 +1,5 @@
-App-*
+*.swp
 .build*
+*.tar.gz
+App-Github-Email-*
+local

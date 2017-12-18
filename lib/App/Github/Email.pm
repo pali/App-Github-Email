@@ -1,51 +1,65 @@
 package App::Github::Email;
 
+use strict;
+use warnings;
+
 use LWP::UserAgent;
-use Getopt::Long qw(GetOptions);
 use Email::Address;
 use List::MoreUtils qw(uniq);
-#PODNAME: App-Github-Email
-#VERSION
 
-my $name;
+# ABSTRACT: Search and print particular Github user emails.
+our $VERSION = '0.1.0';    # VERSION
 
-GetOptions( "name=s" => \$name ) or die("Error");
+=item get_user($username)
 
-if (not defined $name)
+    description: Retrieves Github user email addresses.
+
+    parameter: $username - Github account username.
+
+    returns: A list of email addresses.
+=cut
+
+sub get_user
 {
-	die "Error. Username is not defined. Please try again with: 'github-email -n username'.\n";
-}
+    my $username = shift;
 
-my $ua = LWP::UserAgent->new;
-my $json_get = $ua->get("https://api.github.com/users/$name/events/public");
+    my $ua = LWP::UserAgent->new;
+    my $get_json =
+        $ua->get("https://api.github.com/users/$username/events/public");
 
-if ( $json_get->is_success )
-{
-    my $raw_json    = $json_get->decoded_content;
-    my @addresses   = Email::Address->parse($raw_json);
-    my @unique_addr = uniq @addresses;
+    if ($get_json->is_success)
+    {
+        my $raw_json    = $get_json->decoded_content;
+        my @addresses   = Email::Address->parse($raw_json);
+        my @unique_addr = uniq @addresses;
+        my @retrieved_addrs;
 
-    for my $address (@unique_addr)
-	{
-        if ( $address ne 'git@github.com')
-		{
-            say $address;
+        for my $address (@unique_addr)
+        {
+            if ($address ne 'git@github.com' and not $address =~ /^":"/g)
+            {
+                push(@retrieved_addrs, $address);
+            }
         }
-    }
-}
 
-else
-{
-    die "User is not exist\n";
+        return @retrieved_addrs;
+    }
+
+    else
+    {
+        die "User is not exist!\n";
+    }
 }
 
 __END__
 
-=head1 SYNOPSIS
+#=head1 SYNOPSIS
+#
+#	github-email --name <Github username>
+#
+#	github-email --name faraco
+#	github-email --n faraco 
+#
+#=cut
 
-	github-email --name <Github username>
-
-	github-email --name faraco
-	github-email --n faraco 
-
-=cut
+1;
