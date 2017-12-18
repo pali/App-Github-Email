@@ -2,11 +2,11 @@
 
 use strict;
 use warnings;
-use lib '../lib';
 use App::Github::Email;
 use Getopt::Long 'GetOptions';
+
 # ABSTRACT: A command line tool to get a list of email addresses from particular Github account.
-our $VERSION = '0.1.0'; # VERSION
+our $VERSION = '0.1.0';    # VERSION
 
 my $username;
 
@@ -14,7 +14,8 @@ GetOptions("name=s" => \$username) or die "Error.";
 
 if (not defined $username)
 {
-    die "Error. Username is not defined. Please try again with: 'github-email -n username'.\n";
+    die
+        "Error. Username is not defined. Please try again with: 'github-email -n username'.\n";
 }
 
 my @addresses = App::Github::Email::get_user($username);

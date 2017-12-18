@@ -10,13 +10,20 @@ use List::MoreUtils qw(uniq);
 # ABSTRACT: Search and print particular Github user emails.
 our $VERSION = '0.1.0';    # VERSION
 
+=head2 Functions
+
+=over 4
+
 =item get_user($username)
 
     description: Retrieves Github user email addresses.
 
-    parameter: $username - Github account username.
+    parameter: C<$username> - Github account username.
 
     returns: A list of email addresses.
+
+=back
+
 =cut
 
 sub get_user
@@ -53,13 +60,13 @@ sub get_user
 
 __END__
 
-#=head1 SYNOPSIS
-#
-#	github-email --name <Github username>
-#
-#	github-email --name faraco
-#	github-email --n faraco 
-#
-#=cut
+=head1 SYNOPSIS
+
+	github-email --name <Github username>
+
+	github-email --name faraco
+	github-email --n faraco 
+
+=cut
 
 1;

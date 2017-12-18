@@ -17,13 +17,19 @@ version 0.1.0
 	github-email --name faraco
 	github-email --n faraco 
 
+=head2 Functions
+
+=over 4
+
 =item get_user($username)
 
     description: Retrieves Github user email addresses.
 
-    parameter: $username - Github account username.
+    parameter: C<$username> - Github account username.
 
     returns: A list of email addresses.
+
+=back
 
 =head1 AUTHOR
 
