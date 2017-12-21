@@ -1,4 +1,4 @@
-use Test::More;
+use Test::More tests => 7;
 use lib 'lib';
 
 use_ok('LWP::UserAgent');
@@ -25,4 +25,4 @@ SKIP:
     ok(get_user, "Getting faraco's github account email working fine.");
 }
 
-done_testing;
+done_testing(7);

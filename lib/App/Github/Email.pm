@@ -8,7 +8,7 @@ use Email::Address;
 use List::MoreUtils qw(uniq);
 
 # ABSTRACT: Search and print particular Github user emails.
-our $VERSION = '0.1.0';    # VERSION
+our $VERSION = '0.1.1';    # VERSION
 
 =head2 Functions
 

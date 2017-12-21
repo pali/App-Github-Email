@@ -6,7 +6,7 @@ use App::Github::Email;
 use Getopt::Long 'GetOptions';
 
 # ABSTRACT: A command line tool to get a list of email addresses from particular Github account.
-our $VERSION = '0.1.0';    # VERSION
+our $VERSION = '0.1.1';    # VERSION
 
 my $username;
 
