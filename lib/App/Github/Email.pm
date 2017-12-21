@@ -18,7 +18,7 @@ our $VERSION = '0.1.1';    # VERSION
 
     description: Retrieves Github user email addresses.
 
-    parameter: C<$username> - Github account username.
+    parameter: $username - Github account username.
 
     returns: A list of email addresses.
 
