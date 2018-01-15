@@ -8,14 +8,15 @@ App::Github::Email - Search and print particular Github user emails.
 
 =head1 VERSION
 
-version 0.1.1
+version 0.2.0
 
 =head1 SYNOPSIS
 
-	github-email --name <Github username>
-
-	github-email --name faraco
-	github-email --n faraco 
+	github-email --username <Github username>
+    
+    # Example
+	github-email --username faraco
+	github-email --u faraco 
 
 =head2 Functions
 
@@ -25,7 +26,7 @@ version 0.1.1
 
     description: Retrieves Github user email addresses.
 
-    parameter: C<$username> - Github account username.
+    parameter: $username - Github account username.
 
     returns: A list of email addresses.
 
@@ -37,10 +38,10 @@ faraco <skelic3@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is Copyright (c) 2017 by faraco.
+This software is Copyright (c) 2017-2018 by faraco.
 
 This is free software, licensed under:
 
-  The GNU General Public License, Version 3, June 2007
+  The MIT (X11) License
 
 =cut
