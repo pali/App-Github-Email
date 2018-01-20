@@ -6,8 +6,8 @@ use strict;
 use warnings;
 use v5.10;
 
+use JSON;
 use LWP::UserAgent;
-use Email::Address;
 use List::MoreUtils qw(uniq);
 
 =head2 Functions
@@ -35,7 +35,10 @@ sub get_user {
 
     if ( $get_json->is_success ) {
         my $raw_json    = $get_json->decoded_content;
-        my @addresses   = Email::Address->parse($raw_json);
+        my $dec_json    = decode_json $raw_json;
+        my @push_events = grep { $_->{type} eq 'PushEvent' } @{$dec_json};
+        my @commits     = map { @{$_->{payload}->{commits}} } @push_events;
+        my @addresses   = map { $_->{author}->{email} } @commits;
         my @unique_addr = uniq @addresses;
         my @retrieved_addrs;
 

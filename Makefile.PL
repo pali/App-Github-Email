@@ -21,8 +21,8 @@ my %WriteMakefileArgs = (
   "MIN_PERL_VERSION" => "5.010000",
   "NAME" => "App::Github::Email",
   "PREREQ_PM" => {
-    "Email::Address" => 0,
     "Getopt::Long::Descriptive" => 0,
+    "JSON" => 0,
     "LWP::Online" => 0,
     "LWP::UserAgent" => 0,
     "List::MoreUtils" => 0,
@@ -40,8 +40,8 @@ my %WriteMakefileArgs = (
 
 
 my %FallbackPrereqs = (
-  "Email::Address" => 0,
   "Getopt::Long::Descriptive" => 0,
+  "JSON" => 0,
   "LWP::Online" => 0,
   "LWP::UserAgent" => 0,
   "List::MoreUtils" => 0,
